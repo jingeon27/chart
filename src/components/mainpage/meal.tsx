@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import dayjs from "dayjs";
+import { isLogin } from "../../State/atom";
+import { useRecoilValue } from "recoil";
 interface mealProps {
   DDISH_NM: string;
 }
@@ -17,6 +19,9 @@ const Day = styled.div`
   font-weight: 700;
   font-size: 20px;
   color: #93caee;
+  :hover {
+    cursor: default;
+  }
 `;
 const Title = styled.h1`
   top: 25px;
@@ -26,6 +31,9 @@ const Title = styled.h1`
   font-weight: 700;
   font-size: 40px;
   color: #696969;
+  :hover {
+    cursor: default;
+  }
 `;
 const Inner = styled.div`
   position: relative;
@@ -52,28 +60,29 @@ const Sort = styled.div`
   left: -40px;
 `;
 const MealMenu = styled.li`
+  margin-top: 75px;
   font-size: 32px;
   list-style-type: none;
   text-align: center;
 `;
 const Before = styled(BsChevronLeft)`
   position: absolute;
-  top: 75px;
-  left: 255px;
-  width: 70px;
+  top: 90px;
+  left: 305px;
+  width: 40px;
   color: #696969;
-  height: 70px;
+  height: 40px;
   :hover {
     cursor: pointer;
   }
 `;
 const Next = styled(BsChevronRight)`
   position: absolute;
-  top: 75px;
-  left: 785px;
-  width: 70px;
+  top: 90px;
+  left: 745px;
+  width: 40px;
   color: #696969;
-  height: 70px;
+  height: 40px;
   :hover {
     cursor: pointer;
   }
@@ -92,8 +101,12 @@ const Entire = styled.div`
 `;
 const MealMenuEl = styled.span`
   font-family: "Amiko", sans-serif;
-  font-weight: 500;
+  font-weight: 700;
   font-size: 32px;
+  line-height: 200%;
+  :hover {
+    cursor: default;
+  }
 `;
 const Daytime = styled.li`
   font-family: "Amiko", sans-serif;
@@ -102,6 +115,9 @@ const Daytime = styled.li`
   list-style: none;
   float: left;
   margin-left: 335px;
+  :hover {
+    cursor: default;
+  }
 `;
 const Daytimeul = styled.ul`
   left: -260px;
@@ -114,6 +130,7 @@ const Daytimeul = styled.ul`
 export default function Meal() {
   const [showMenu, setShowMenu] = useState([]);
   const [day, setDay] = useState<any>(new Date());
+  const IsLogin = useRecoilValue(isLogin);
   let today = new Date(day);
   let dateString: string = today.toLocaleDateString("ko-KR", {
     year: "numeric",
@@ -123,6 +140,11 @@ export default function Meal() {
   let dayName: string = today.toLocaleDateString("ko-KR", {
     weekday: "long",
   });
+  const arr = [
+    { list: "급식없음" },
+    { list: "급식없음" },
+    { list: "급식없음" },
+  ];
   useEffect(() => {
     console.log("asd");
     const date = new Date(day);
@@ -153,6 +175,7 @@ export default function Meal() {
         });
     }
   }, [day, setDay]);
+
   const daytime: daytimeprops[] = [
     { day: "아침" },
     { day: "점심" },
@@ -186,22 +209,39 @@ export default function Meal() {
 
               <ul>
                 <Sort>
-                  {showMenu.map((user: mealProps) => (
+                  {IsLogin ? (
                     <>
-                      <Container>
-                        <MealMenu>
-                          {user.DDISH_NM.split("<br/>").map((line: string) => {
-                            return (
-                              <MealMenuEl key={index++}>
-                                {line}
-                                <br />
-                              </MealMenuEl>
-                            );
-                          })}
-                        </MealMenu>
-                      </Container>
+                      {showMenu.map((user: mealProps) => (
+                        <>
+                          <Container>
+                            <MealMenu>
+                              {user.DDISH_NM.replace(/[0-9]/g, "")
+                                .replace(/\./g, "")
+                                .split("<br/>")
+                                .map((line: string) => {
+                                  return (
+                                    <MealMenuEl key={index++}>
+                                      {line.replace(/\(\)/g, "")}
+                                      <br />
+                                    </MealMenuEl>
+                                  );
+                                })}
+                            </MealMenu>
+                          </Container>
+                        </>
+                      ))}
                     </>
-                  ))}
+                  ) : (
+                    <>
+                      {arr.map((user) => (
+                        <>
+                          <Container>
+                            <MealMenuEl>{user.list}</MealMenuEl>
+                          </Container>
+                        </>
+                      ))}
+                    </>
+                  )}
                 </Sort>
               </ul>
             </li>

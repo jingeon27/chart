@@ -1,11 +1,10 @@
-import React, { useState } from "react";
 import Image from "../images/Appicon.png";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Signin from "./loginpage/signin";
 import Signup from "./loginpage/signup";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { isSignUp, loginState } from "../State/atom";
+import { loginState } from "../State/atom";
 import { loginPageState } from "../State/atom";
 type arrprops = {
   value: string;
@@ -117,13 +116,11 @@ export default function Header() {
   // const [isSearchMode, setIsSearchMode] = useState<boolean>(false);
   const [state, setState] = useRecoilState<boolean>(loginState);
   const [signState, setSignState] = useRecoilState<boolean>(loginPageState);
-  const setIsState = useSetRecoilState(isSignUp);
   const showSignup = () => {
     setState(!state);
   };
   const showSignin = () => {
     setSignState(!signState);
-    setIsState(true);
   };
   // window.onclick((e) => setState(false));
   return (

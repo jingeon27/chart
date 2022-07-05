@@ -9,6 +9,7 @@ import {
   areaCode,
   classsNum,
   gradeEl,
+  isSignUp,
 } from "../../State/atom";
 const Login = styled.div`
   position: fixed;
@@ -105,6 +106,7 @@ export default function Signup() {
   const setSchoolState = useSetRecoilState(schoolCode);
   const setClassState = useSetRecoilState(classsNum);
   const setAreaState = useSetRecoilState(areaCode);
+  const setIsState = useSetRecoilState(isSignUp);
   const [infoState, setInfoState] = useState("");
 
   useEffect(() => {
@@ -138,7 +140,7 @@ export default function Signup() {
           console.log(err);
         });
     }
-  }, [infoState, setInfoState]);
+  }, [infoState, setAreaState, setInfoState, setSchoolState]);
   interface InputElprops {
     onchange: ChangeEventHandler;
     placeholder: string;
@@ -185,6 +187,7 @@ export default function Signup() {
   const Endlogin = () => {
     setState(!state);
     setSignState(!signState);
+    setIsState(false);
   };
 
   return (

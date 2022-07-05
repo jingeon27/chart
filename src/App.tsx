@@ -10,6 +10,10 @@ import Githubpage from "./components/mypage/githubpage";
 const GlobalStyle = createGlobalStyle`
 body {
   background: #f4f5f8;
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none
 }
 `;
 function App() {
@@ -19,14 +23,7 @@ function App() {
         <BrowserRouter>
           <GlobalStyle />
           <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                  <Mainpage />
-                </>
-              }
-            />
+            <Route path="/" element={<Mainpage />} />
             <Route path="/mypage" element={<Mypage />} />
             <Route path="/board" element={<Board />} />
             <Route path="/schedule" element={<Schedule />} />
