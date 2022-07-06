@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import styled from "styled-components";
+import axios from "axios";
 type arrprop = {
   id: string;
 };
@@ -164,6 +166,21 @@ const arr3: arrprop[] = [
   { id: "4" },
 ];
 export default function Schedule() {
+  useEffect(() => {
+    const token = window.sessionStorage.getItem("accessToken");
+    asdf();
+    async function asdf() {
+      await axios({
+        method: "GET",
+        url: "http://118.67.130.149:8080/api/v1/timetable/week",
+        headers: {
+          Authorization: `Bearer${token}`,
+        },
+      })
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+    }
+  }, []);
   return (
     <>
       <H2>2022년 1학기</H2>

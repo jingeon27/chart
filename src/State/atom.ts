@@ -28,14 +28,6 @@ export const classsNum = atom({
   key: "classNum",
   default: 0,
 });
-export const isSignUp = atom({
-  key: "isSignUp",
-  default: true,
-});
-export const isSignin = atom({
-  key: "isSignin",
-  default: false,
-});
 export const isLogin = atom({
   key: "isLogin",
   default: false,

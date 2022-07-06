@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import Chart from "../../images/Chart.png";
 import Github from "../../images/Github.png";
 import { useRecoilState } from "recoil";
-import { isSignin, loginPageState } from "../../State/atom";
+import { loginPageState } from "../../State/atom";
 const Page = styled.div`
   position: fixed;
   left: 0;
@@ -69,7 +69,6 @@ const Text = styled.div`
 
 export default function Signin() {
   const [state, setState] = useRecoilState(loginPageState);
-  const [inState, setInState] = useRecoilState(isSignin);
   const loginUri = `https://github.com/login/oauth/authorize?scope=gist,%20read:org,%20read:repo_hook,%20repo,%20user:emai&client_id=e68697d72d75b1f8461f`;
   useEffect(() => {
     document.body.style.cssText = `
@@ -85,7 +84,6 @@ export default function Signin() {
   }, []);
   const Endlogin = () => {
     setState(!state);
-    setInState(!inState);
   };
   return (
     <>

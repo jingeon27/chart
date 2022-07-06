@@ -28,7 +28,6 @@ const ListTable = styled.li`
   list-style: none;
   color: #696969;
   text-align: center;
-  text-shadow: 1px 1px #696969;
   font-weight: 700;
   font-family: "Amiko", sans-serif;
 `;

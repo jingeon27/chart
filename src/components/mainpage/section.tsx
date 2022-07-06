@@ -181,16 +181,16 @@ export default function Section() {
             <Name>마이페이지</Name>
             <Person />
           </Tb>
-          <Tb>
-            <Link to="/github">
+          <Link to="/github">
+            <Tb>
               <Bl1 />
               <Bl2 />
               <Bl3 />
               <Bl4 />
               <Gb>Github Commit</Gb>
               <Cm>커밋 확인</Cm>
-            </Link>
-          </Tb>
+            </Tb>
+          </Link>
         </Po>
       </>
     </>

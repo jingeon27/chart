@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import dayjs from "dayjs";
-import { isLogin } from "../../State/atom";
+import { areaCode, isLogin, schoolCode } from "../../State/atom";
 import { useRecoilValue } from "recoil";
 interface mealProps {
   DDISH_NM: string;
@@ -130,6 +130,8 @@ const Daytimeul = styled.ul`
 export default function Meal() {
   const [showMenu, setShowMenu] = useState([]);
   const [day, setDay] = useState<any>(new Date());
+  const AreaCode = useRecoilValue(areaCode);
+  const SchoolCode = useRecoilValue(schoolCode);
   const IsLogin = useRecoilValue(isLogin);
   let today = new Date(day);
   let dateString: string = today.toLocaleDateString("ko-KR", {
@@ -145,6 +147,7 @@ export default function Meal() {
     { list: "급식없음" },
     { list: "급식없음" },
   ];
+  useEffect(() => {});
   useEffect(() => {
     console.log("asd");
     const date = new Date(day);
@@ -158,6 +161,7 @@ export default function Meal() {
         // ATPT_OFCDC_SC_CODE: "G10",
         // SD_SCHUL_CODE: "7430310",
         MLSV_YMD: mealDate,
+        // date: mealDate,
       };
 
       await axios
@@ -169,11 +173,26 @@ export default function Meal() {
           const data = res.data;
           setShowMenu(data.mealServiceDietInfo[1].row);
           console.log(showMenu);
+          console.log(res);
         })
         .catch((err) => {
           console.log(err);
         });
+      // await axios
+      // .get("http://118.67.130.149:8080/api/v1/meal", { params },)
+      // .then((res)=>{console.log(res)})
+      // .catch((err)=>{console.log(err)});
+      // await axios({
+      //   method: "GET",
+      //   url: `http://118.67.130.149:8080/api/v1/meal?${params}`,
+      //   headers: {
+      //     Authorization: `Bearer${token}`,
+      //   },
+      // })
+      //   .then((res) => console.log(res))
+      //   .catch((err) => console.log(err));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [day, setDay]);
 
   const daytime: daytimeprops[] = [

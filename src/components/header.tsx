@@ -3,9 +3,8 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Signin from "./loginpage/signin";
 import Signup from "./loginpage/signup";
-import { useRecoilState, useSetRecoilState } from "recoil";
-import { loginState } from "../State/atom";
-import { loginPageState } from "../State/atom";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { loginState, loginPageState, isLogin } from "../State/atom";
 type arrprops = {
   value: string;
   id: string;
@@ -59,7 +58,19 @@ const ItemName = styled(Link)`
   margin: 10px 40px 11px 45px;
   font-size: 20px;
   opacity: 0.61;
-  /* color: #000000; */
+  color: #000000;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 700;
+  text-decoration: none;
+  &:focus,
+  &:hover {
+    color: #93caee;
+  }
+`;
+const Itemname = styled.div`
+  margin: 0px 40px 11px 45px;
+  font-size: 20px;
+  opacity: 0.61;
   color: #000000;
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 700;
@@ -116,6 +127,7 @@ export default function Header() {
   // const [isSearchMode, setIsSearchMode] = useState<boolean>(false);
   const [state, setState] = useRecoilState<boolean>(loginState);
   const [signState, setSignState] = useRecoilState<boolean>(loginPageState);
+  const IsLogin = useRecoilValue(isLogin);
   const showSignup = () => {
     setState(!state);
   };
@@ -144,11 +156,29 @@ export default function Header() {
           <Logo src={Image}></Logo>
         </StyledLink>
         <Mainmenu>
-          {arr.map((user) => (
-            <li className="item">
-              <ItemName to={user.id}>{user.value}</ItemName>
-            </li>
-          ))}
+          {IsLogin ? (
+            <>
+              {arr.map((user) => (
+                <li className="item">
+                  <ItemName to={user.id}>{user.value}</ItemName>
+                </li>
+              ))}
+            </>
+          ) : (
+            <>
+              {arr.map((user) => (
+                <li className="item">
+                  <Itemname
+                    onClick={() => {
+                      window.alert("로그인이 필요합니다.");
+                    }}
+                  >
+                    {user.value}
+                  </Itemname>
+                </li>
+              ))}
+            </>
+          )}
           <li>
             <Logup onClick={showSignup}>Signup</Logup>
           </li>
