@@ -1,8 +1,10 @@
 import styled from "styled-components";
-import board from "../../images/board.png";
-import clock from "../../images/clock.png";
+import clock from "../../images/board.png";
+import board from "../../images/clock.png";
 import { BsPerson } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { isLogin } from "../../State/atom";
+import { useRecoilValue } from "recoil";
 const Sc = styled.div`
   position: relative;
   left: 0;
@@ -162,37 +164,95 @@ const Cm = styled.h1`
   color: #696969;
 `;
 export default function Section() {
+  const IsLogin = useRecoilValue(isLogin);
   return (
     <>
-      <>
-        <Sc>
-          <Day1>2022년 1학기</Day1>
-          <Title>2-2 시간표</Title>
-          <Ck src={clock}></Ck>
-        </Sc>
-        <Sc>
-          <School>대덕소프트웨어마이스터고등학교</School>
-          <Born>학교게시판</Born>
-          <Boa src={board}></Boa>
-        </Sc>
-        <Po>
-          <Tb>
-            <Name1>김대희 님 반가워요</Name1>
-            <Name>마이페이지</Name>
-            <Person />
-          </Tb>
-          <Link to="/github">
-            <Tb>
-              <Bl1 />
-              <Bl2 />
-              <Bl3 />
-              <Bl4 />
-              <Gb>Github Commit</Gb>
-              <Cm>커밋 확인</Cm>
-            </Tb>
+      {IsLogin ? (
+        <>
+          {" "}
+          <Link to="/schedule">
+            <Sc>
+              <Day1>2022년 1학기</Day1>
+              <Title>2-2 시간표</Title>
+              <Ck src={clock}></Ck>
+            </Sc>
           </Link>
-        </Po>
-      </>
+          <Link to="/board">
+            <Sc>
+              <School>대덕소프트웨어마이스터고등학교</School>
+              <Born>학교게시판</Born>
+              <Boa src={board}></Boa>
+            </Sc>
+          </Link>
+          <Po>
+            <Link to="/mypage">
+              <Tb>
+                <Name1>김대희 님 반가워요</Name1>
+                <Name>마이페이지</Name>
+                <Person />
+              </Tb>
+            </Link>
+            <Link to="/github">
+              <Tb>
+                <Bl1 />
+                <Bl2 />
+                <Bl3 />
+                <Bl4 />
+                <Gb>Github Commit</Gb>
+                <Cm>커밋 확인</Cm>
+              </Tb>
+            </Link>
+          </Po>
+        </>
+      ) : (
+        <>
+          <div
+            onClick={() => {
+              alert("로그인이 필요합니다.");
+            }}
+          >
+            <Sc>
+              <Day1>2022년 1학기</Day1>
+              <Title>2-2 시간표</Title>
+              <Ck src={clock}></Ck>
+            </Sc>
+          </div>
+          <div
+            onClick={() => {
+              alert("로그인이 필요합니다.");
+            }}
+          >
+            <Sc>
+              <School>대덕소프트웨어마이스터고등학교</School>
+              <Born>학교게시판</Born>
+              <Boa src={board}></Boa>
+            </Sc>
+          </div>
+          <Po>
+            <div
+              onClick={() => {
+                alert("로그인이 필요합니다.");
+              }}
+            >
+              <Tb>
+                <Name1>김대희 님 반가워요</Name1>
+                <Name>마이페이지</Name>
+                <Person />
+              </Tb>
+            </div>
+            <Link to="/github">
+              <Tb>
+                <Bl1 />
+                <Bl2 />
+                <Bl3 />
+                <Bl4 />
+                <Gb>Github Commit</Gb>
+                <Cm>커밋 확인</Cm>
+              </Tb>
+            </Link>
+          </Po>
+        </>
+      )}
     </>
   );
 }

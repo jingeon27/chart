@@ -5,6 +5,7 @@ import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import dayjs from "dayjs";
 import { areaCode, isLogin, schoolCode } from "../../State/atom";
 import { useRecoilValue } from "recoil";
+import { stringify } from "querystring";
 interface mealProps {
   DDISH_NM: string;
 }
@@ -127,12 +128,19 @@ const Daytimeul = styled.ul`
   width: 1200px;
   height: 40px;
 `;
+interface mealprops {
+  id: string;
+}
 export default function Meal() {
   const [showMenu, setShowMenu] = useState([]);
+  // const [showBr, setShowBr] = useState([]);
+  // const [showLu, setShowLu] = useState([]);
+  // const [showDi, setShowDi] = useState([]);
   const [day, setDay] = useState<any>(new Date());
-  const AreaCode = useRecoilValue(areaCode);
-  const SchoolCode = useRecoilValue(schoolCode);
+  // const AreaCode = useRecoilValue(areaCode);
+  // const SchoolCode = useRecoilValue(schoolCode);
   const IsLogin = useRecoilValue(isLogin);
+
   let today = new Date(day);
   let dateString: string = today.toLocaleDateString("ko-KR", {
     year: "numeric",
@@ -152,6 +160,7 @@ export default function Meal() {
     console.log("asd");
     const date = new Date(day);
     const mealDate = dayjs(date).format("YYYYMMDD");
+    // const token = localStorage.getItem("accessToken");
     asdf();
     async function asdf() {
       const params = {
@@ -161,7 +170,7 @@ export default function Meal() {
         // ATPT_OFCDC_SC_CODE: "G10",
         // SD_SCHUL_CODE: "7430310",
         MLSV_YMD: mealDate,
-        // date: mealDate,
+        //date: mealDate,
       };
 
       await axios
@@ -178,23 +187,28 @@ export default function Meal() {
         .catch((err) => {
           console.log(err);
         });
-      // await axios
-      // .get("http://118.67.130.149:8080/api/v1/meal", { params },)
-      // .then((res)=>{console.log(res)})
-      // .catch((err)=>{console.log(err)});
       // await axios({
       //   method: "GET",
-      //   url: `http://118.67.130.149:8080/api/v1/meal?${params}`,
+      //   baseURL: "http://118.67.130.149:8080/api/v1/meal",
+      //   params: params,
       //   headers: {
-      //     Authorization: `Bearer${token}`,
+      //     Authorization: `Bearer ${token}`,
       //   },
       // })
-      //   .then((res) => console.log(res))
+      //   .then((res) => {
+      //     console.log(res.data);
+      //     const breakfast = res.data.breakfast;
+      //     const lunch = res.data.lunch;
+      //     const dinner = res.data.dinner;
+      //     setShowBr(breakfast);
+      //     setShowLu(lunch);
+      //     setShowDi(dinner);
+      //     console.log(showBr);
+      //   })
       //   .catch((err) => console.log(err));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [day, setDay]);
-
   const daytime: daytimeprops[] = [
     { day: "아침" },
     { day: "점심" },
@@ -249,13 +263,51 @@ export default function Meal() {
                           </Container>
                         </>
                       ))}
+                      {/* <Container>
+                        <MealMenu>
+                          {showBr.map((line: any) => {
+                            return (
+                              <MealMenuEl>
+                                {line}
+                                <br />
+                              </MealMenuEl>
+                            );
+                          })}
+                        </MealMenu>
+                      </Container>
+                      <Container>
+                        <MealMenu>
+                          {showLu.map((line: any) => {
+                            return (
+                              <MealMenuEl>
+                                {line}
+                                <br />
+                              </MealMenuEl>
+                            );
+                          })}
+                        </MealMenu>
+                      </Container>
+                      <Container>
+                        <MealMenu>
+                          {showDi.map((line: any) => {
+                            return (
+                              <MealMenuEl>
+                                {line}
+                                <br />
+                              </MealMenuEl>
+                            );
+                          })}
+                        </MealMenu>
+                      </Container> */}
                     </>
                   ) : (
                     <>
                       {arr.map((user) => (
                         <>
                           <Container>
-                            <MealMenuEl>{user.list}</MealMenuEl>
+                            <MealMenu>
+                              <MealMenuEl>{user.list}</MealMenuEl>
+                            </MealMenu>
                           </Container>
                         </>
                       ))}

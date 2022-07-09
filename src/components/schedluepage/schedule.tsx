@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 type arrprop = {
@@ -158,14 +158,16 @@ const arr2: arrprop[][] = [
     { id: "체창" },
   ],
 ];
-const arr3: arrprop[] = [
-  { id: "0" },
-  { id: "1" },
-  { id: "2" },
-  { id: "3" },
-  { id: "4" },
-];
+
 export default function Schedule() {
+  const setting = { name: "", id: 0 };
+  const [showSubject, setShowSubject] = useState([]);
+  const [showSubjectA, setShowSubjectA] = useState([]);
+  const [showSubjectB, setShowSubjectB] = useState([]);
+  const [showSubjectC, setShowSubjectC] = useState([]);
+  const [showSubjectD, setShowSubjectD] = useState([]);
+  const [showClass, setShowClass] = useState(0);
+  const [showGrade, setShowGrade] = useState(0);
   useEffect(() => {
     const token = window.sessionStorage.getItem("accessToken");
     asdf();
@@ -174,17 +176,37 @@ export default function Schedule() {
         method: "GET",
         url: "http://118.67.130.149:8080/api/v1/timetable/week",
         headers: {
-          Authorization: `Bearer${token}`,
+          Authorization: `Bearer ${token}`,
         },
       })
-        .then((res) => console.log(res))
+        .then((res) => {
+          console.log(res.data.data);
+          const data = res.data.data;
+          setShowSubject(data[0].subjects.slice(0, 7));
+          setShowSubjectA(data[1].subjects.slice(0, 7));
+          setShowSubjectB(data[2].subjects.slice(0, 7));
+          setShowSubjectC(data[3].subjects.slice(0, 7));
+          setShowSubjectD(data[4].subjects.slice(0, 7));
+          console.log(data[0].subjects);
+          console.log(showSubject);
+          setShowClass(data[0].classNum);
+          console.log(showClass);
+          setShowGrade(data[0].grade);
+        })
         .catch((err) => console.log(err));
     }
   }, []);
+  const arr3 = [
+    { id: showSubject },
+    { id: showSubjectA },
+    { id: showSubjectB },
+    { id: showSubjectC },
+    { id: showSubjectD },
+  ];
   return (
     <>
       <H2>2022년 1학기</H2>
-      <H1>2-2시간표</H1>
+      <H1>{`${showGrade}-${showClass}시간표`}</H1>
       <Ta>
         <Ln />
         <Ln1 />
@@ -199,13 +221,19 @@ export default function Schedule() {
           ))}
         </St>
         <Sr>
-          {arr3.map((user, idx) => (
-            <ul>
-              {arr2[idx].map((user) => (
-                <li>{user.id}</li>
+          {showSubject === [] ? (
+            <div>Loading...</div>
+          ) : (
+            <>
+              {arr3.map((user) => (
+                <ul>
+                  {user.id.map((line: any) => (
+                    <li>{line.name.slice(0, 2)}</li>
+                  ))}
+                </ul>
               ))}
-            </ul>
-          ))}
+            </>
+          )}
         </Sr>
       </Ta>
     </>

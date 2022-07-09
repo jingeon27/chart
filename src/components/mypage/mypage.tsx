@@ -1,19 +1,21 @@
 /* eslint-disable array-callback-return */
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
 type Arrprops = {
   id: string;
 };
 const Table = styled.div`
   position: absolute;
-  top: 144px;
+  top: 180px;
   right: 0;
   left: 0;
   width: 100%;
   text-align: center;
 `;
 const UserName = styled.div`
-  color: #696969;
-  font-size: 44px;
+  color: #93caee;
+  font-size: 35px;
   font-weight: 700;
   font-family: "Amiko", sans-serif;
 `;
@@ -67,11 +69,37 @@ const arr: Arrprops[] = [
   { id: "라이선스" },
 ];
 export default function Mypage() {
+  const [userId, setUserId] = useState("");
+  useEffect(() => {
+    const token = sessionStorage.getItem("accessToken");
+    name();
+    async function name() {
+      await axios({
+        method: "GET",
+        baseURL: "http://118.67.130.149:8080/api/v1/auth/my",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((res) => {
+          console.log(res);
+          setUserId(res.data.name);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  });
   return (
     <>
       <Table>
-        <UserNickName>kimdaehee0824</UserNickName>
-        <UserName>김대희</UserName>
+        <UserName>
+          {userId}
+          <span style={{ color: "#696969" }}>님</span>
+        </UserName>
+        {/* <UserNickName>
+          kimdaehee0824<span style={{ color: "#696969" }}>님</span>
+        </UserNickName> */}
       </Table>
       <UlCenter>
         {arr.map((user) => (

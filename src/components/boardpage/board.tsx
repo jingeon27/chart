@@ -3,6 +3,7 @@ import axios from "axios";
 
 // import Pagination from "./Pagination";
 import Boardpage from "./boardpage";
+import Pagination from "./Pagination";
 
 interface Airline {
   id: number;
@@ -23,52 +24,58 @@ interface Passenger {
   __v: number;
 }
 
-interface Response {
-  totalPassengers: number;
-  totalPages: number;
-  data: Array<Passenger>;
-}
+// interface Response {
+//   totalPassengers: number;
+//   totalPages: number;
+//   data: Array<Passenger>;
+// }
 
 function App() {
-  const [page, setPage] = useState<number>(0);
+  const [idx, setIdx] = useState<number>(0);
 
   const [totalPages, setTotalPages] = useState<number>(0);
   const [items, setItems] = useState<Array<Passenger>>([]);
 
   const handlePageChange = (currentPage: number): void => {
-    setPage(currentPage);
+    setIdx(currentPage);
   };
 
   useEffect(() => {
     const fetch = async () => {
-      const params = { page, size: 10 };
-      const {
-        data: { totalPages, data },
-      } = await axios.get<Response>(
-        "https://api.instantwebtools.net/v1/passenger",
-        { params }
-      );
-      console.log(totalPages);
-      console.log(data);
-      setTotalPages(totalPages);
-      setItems(data);
+      const token = sessionStorage.getItem("accessToken");
+      const params = { idx, size: 10 };
+      // const {
+      //   // data: { totalPages, data },
+      // } =
+      await axios({
+        method: "GET",
+        baseURL: "http://118.67.130.149:8080/api/v1/question/list",
+        params: params,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      // console.log(totalPages);
+      // console.log(data);
+      // setTotalPages(totalPages);
+      // setItems(data);
     };
 
     fetch();
-  }, [page]);
+  }, [idx]);
 
   return (
     <>
-      {/* <ul>
+      <ul>
         {items.map((item) => (
           <li key={item._id}>{item.name}</li>
         ))}
       </ul>
       <Pagination
         count={totalPages}
-        page={page}
+        page={idx}
         onPageChange={handlePageChange}
-      /> */}
+      />
       <Boardpage />
     </>
   );
