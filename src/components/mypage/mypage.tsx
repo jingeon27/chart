@@ -7,7 +7,7 @@ type Arrprops = {
 };
 const Table = styled.div`
   position: absolute;
-  top: 180px;
+  top: 154px;
   right: 0;
   left: 0;
   width: 100%;
@@ -20,20 +20,25 @@ const UserName = styled.div`
   font-family: "Amiko", sans-serif;
 `;
 const UserNickName = styled.div`
-  color: #93caee;
-  font-size: 35px;
-  font-weight: 700;
   font-family: "Amiko", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 67px;
+  letter-spacing: 0.05em;
+  color: #696969;
 `;
 const ListTable = styled.li`
   font-size: 20px;
   list-style: none;
   color: #696969;
-  text-align: center;
+
   font-weight: 700;
   font-family: "Amiko", sans-serif;
+  text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
 `;
 const TableBox = styled.div`
+  text-align: center;
   width: 725px;
   height: 100px;
   background-color: #ffffff;
@@ -70,6 +75,7 @@ const arr: Arrprops[] = [
 ];
 export default function Mypage() {
   const [userId, setUserId] = useState("");
+  const [userName, setUserName] = useState("");
   useEffect(() => {
     const token = sessionStorage.getItem("accessToken");
     name();
@@ -83,7 +89,8 @@ export default function Mypage() {
       })
         .then((res) => {
           console.log(res);
-          setUserId(res.data.name);
+          setUserId(res.data.githubId);
+          setUserName(res.data.name);
         })
         .catch((err) => {
           console.log(err);
@@ -95,11 +102,9 @@ export default function Mypage() {
       <Table>
         <UserName>
           {userId}
-          <span style={{ color: "#696969" }}>님</span>
+          {/* <span style={{ color: "#696969" }}>님</span> */}
         </UserName>
-        {/* <UserNickName>
-          kimdaehee0824<span style={{ color: "#696969" }}>님</span>
-        </UserNickName> */}
+        <UserNickName>{userName}</UserNickName>
       </Table>
       <UlCenter>
         {arr.map((user) => (

@@ -111,56 +111,8 @@ const arr1: arrprop[] = [
   { id: "6교시" },
   { id: "7교시" },
 ];
-const arr2: arrprop[][] = [
-  [
-    { id: "창체" },
-    { id: "체창" },
-    { id: "창체" },
-    { id: "체창" },
-    { id: "창체" },
-    { id: "체창" },
-    { id: "창체" },
-  ],
-  [
-    { id: "체창" },
-    { id: "창체" },
-    { id: "체창" },
-    { id: "창체" },
-    { id: "체창" },
-    { id: "창체" },
-    { id: "체창" },
-  ],
-  [
-    { id: "창체" },
-    { id: "체창" },
-    { id: "창체" },
-    { id: "체창" },
-    { id: "창체" },
-    { id: "체창" },
-    { id: "창체" },
-  ],
-  [
-    { id: "체창" },
-    { id: "창체" },
-    { id: "체창" },
-    { id: "창체" },
-    { id: "체창" },
-    { id: "창체" },
-    { id: "체창" },
-  ],
-  [
-    { id: "체창" },
-    { id: "창체" },
-    { id: "체창" },
-    { id: "창체" },
-    { id: "체창" },
-    { id: "창체" },
-    { id: "체창" },
-  ],
-];
 
 export default function Schedule() {
-  const setting = { name: "", id: 0 };
   const [showSubject, setShowSubject] = useState([]);
   const [showSubjectA, setShowSubjectA] = useState([]);
   const [showSubjectB, setShowSubjectB] = useState([]);

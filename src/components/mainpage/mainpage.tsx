@@ -10,7 +10,6 @@ import {
   isLogin,
 } from "../../State/atom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { setCookie } from "../../State/cookie";
 export default function Mainpage() {
   const setIsLogin = useSetRecoilState(isLogin);
   const SchoolCode = useRecoilValue(schoolCode);

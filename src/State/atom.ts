@@ -32,3 +32,23 @@ export const isLogin = atom({
   key: "isLogin",
   default: false,
 });
+export const schoolName = atom({
+  key: "schoolName",
+  default: "",
+});
+export const writeOn = atom({
+  key: "writeOn",
+  default: false,
+});
+export const showBoardText = atom({
+  key: "showBoardText",
+  default: false,
+});
+export const boardTitle = atom({
+  key: "boardTitle",
+  default: "",
+});
+export const boardContent = atom({
+  key: "boardContent",
+  default: "",
+});

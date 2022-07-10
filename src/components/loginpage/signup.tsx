@@ -79,7 +79,7 @@ const Lgul = styled.ul`
     height: 62px;
     width: 518px;
     border: solid 2px #93caee;
-    overflow: scroll;
+
     :focus {
       border: solid 2px #6497b5;
     }

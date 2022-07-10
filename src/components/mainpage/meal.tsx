@@ -3,9 +3,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import dayjs from "dayjs";
-import { areaCode, isLogin, schoolCode } from "../../State/atom";
+import { areaCode, isLogin, schoolCode, schoolName } from "../../State/atom";
 import { useRecoilValue } from "recoil";
-import { stringify } from "querystring";
 interface mealProps {
   DDISH_NM: string;
 }
@@ -128,9 +127,6 @@ const Daytimeul = styled.ul`
   width: 1200px;
   height: 40px;
 `;
-interface mealprops {
-  id: string;
-}
 export default function Meal() {
   const [showMenu, setShowMenu] = useState([]);
   // const [showBr, setShowBr] = useState([]);
@@ -140,7 +136,6 @@ export default function Meal() {
   // const AreaCode = useRecoilValue(areaCode);
   // const SchoolCode = useRecoilValue(schoolCode);
   const IsLogin = useRecoilValue(isLogin);
-
   let today = new Date(day);
   let dateString: string = today.toLocaleDateString("ko-KR", {
     year: "numeric",
@@ -239,7 +234,19 @@ export default function Meal() {
                   <Daytime>{user.day}</Daytime>
                 ))}
               </Daytimeul>
-
+              <ul>
+                <Sort>
+                  {arr.map((user) => (
+                    <>
+                      <Container>
+                        <MealMenu>
+                          <MealMenuEl>{user.list}</MealMenuEl>
+                        </MealMenu>
+                      </Container>
+                    </>
+                  ))}
+                </Sort>
+              </ul>
               <ul>
                 <Sort>
                   {IsLogin ? (
@@ -301,17 +308,7 @@ export default function Meal() {
                       </Container> */}
                     </>
                   ) : (
-                    <>
-                      {arr.map((user) => (
-                        <>
-                          <Container>
-                            <MealMenu>
-                              <MealMenuEl>{user.list}</MealMenuEl>
-                            </MealMenu>
-                          </Container>
-                        </>
-                      ))}
-                    </>
+                    <></>
                   )}
                 </Sort>
               </ul>

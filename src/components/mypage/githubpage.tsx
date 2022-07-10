@@ -39,7 +39,7 @@ const Username = styled.h1`
 `;
 export default function Githubpage() {
   const [userId, setUserId] = useState<any>("");
-  const [commit, setCommit] = useState("");
+  // const [commit, setCommit] = useState("");
   useEffect(() => {
     const token = sessionStorage.getItem("accessToken");
     name();
@@ -61,25 +61,25 @@ export default function Githubpage() {
         });
     }
   });
-  useEffect(() => {
-    const token = sessionStorage.getItem("accessToken");
-    name();
-    async function name() {
-      await axios({
-        method: "GET",
-        baseURL: "https://api.github.com/repo/",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }, [userId, setUserId]);
+  // useEffect(() => {
+  //   const token = sessionStorage.getItem("accessToken");
+  //   name();
+  //   async function name() {
+  //     await axios({
+  //       method: "GET",
+  //       baseURL: "https://api.github.com/repo/",
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     })
+  //       .then((res) => {
+  //         console.log(res);
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   }
+  // }, [userId, setUserId]);
   return (
     <>
       <Control>
