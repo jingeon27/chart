@@ -60,7 +60,7 @@ const Sort = styled.div`
   position: relative;
   top: 22px;
   left: 70px;
-  width: 200px;
+  width: 500px;
   height: 26px;
 `;
 const Title = styled.div`
@@ -110,7 +110,7 @@ const Sort3 = styled.div`
   position: relative;
   top: 22px;
   left: 40px;
-  width: 200px;
+  width: 500px;
   height: 26px;
 `;
 const Sort4 = styled.div`
@@ -195,9 +195,9 @@ function App() {
       {showBoard ? (
         <>
           <Location>
-            {arr.map((user: any) => (
+            {items.map((user: any) => (
               <Container2
-                onClick={(e) => showBoardTextEL(user.title, user.text)}
+                onClick={(e) => showBoardTextEL(user.title, user.content)}
               >
                 <Sort3>
                   <Title>
@@ -206,7 +206,7 @@ function App() {
                   </Title>
                 </Sort3>
                 <Sort4>
-                  <Writter>작성자 - {user.name}</Writter>
+                  <Writter>작성자 - {user.writer.name}</Writter>
                 </Sort4>
               </Container2>
             ))}
@@ -216,9 +216,9 @@ function App() {
       ) : (
         <>
           <Location>
-            {arr.map((user: any) => (
+            {items.map((user: any) => (
               <Container
-                onClick={(e) => showBoardTextEL(user.title, user.text)}
+                onClick={(e) => showBoardTextEL(user.title, user.content)}
               >
                 <Sort>
                   <Title>
@@ -227,7 +227,7 @@ function App() {
                   </Title>
                 </Sort>
                 <Sort2>
-                  <Writter>작성자 - {user.name}</Writter>
+                  <Writter>작성자 - {user.writer.name}</Writter>
                 </Sort2>
               </Container>
             ))}

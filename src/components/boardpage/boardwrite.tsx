@@ -1,3 +1,5 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { writeOn } from "../../State/atom";
@@ -87,17 +89,63 @@ const Success = styled.div`
 `;
 export default function Boardwrite() {
   const [state, setState] = useRecoilState(writeOn);
+  const [text, setText] = useState("");
+  const [title, setTitle] = useState("");
+  //   useEffect(() => {
+  //     const token = sessionStorage.getItem("accessToken");
+  //     board();
+  //     const BoardData = {
+  //       title: title,
+  //       content: text,
+  //     };
+  //     async function board() {
+  //       await axios.post(
+  //         "http://118.67.130.149:8080/api/v1/question",
+  //         BoardData,
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${token}`,
+  //           },
+  //         }
+  //       );
+  //     }
+  //   }, [setState, state]);
   return (
     <>
       <Container>
         <Sort>
           <H1>새글 작성하기</H1>
         </Sort>
-        <TitleInput placeholder="제목을 입력하세요"></TitleInput>
-        <ContentsInput placeholder="본문을 입력하세요."></ContentsInput>
+        <TitleInput
+          placeholder="제목을 입력하세요"
+          onChange={(e) => {
+            setTitle(e.target.value);
+          }}
+        ></TitleInput>
+        <ContentsInput
+          placeholder="본문을 입력하세요."
+          onChange={(e) => {
+            setText(e.target.value);
+          }}
+        ></ContentsInput>
         <Button
           onClick={() => {
-            setState(!state);
+            const token = sessionStorage.getItem("accessToken");
+            const BoardData = {
+              title: title,
+              content: text,
+            };
+            axios
+              .post("http://118.67.130.149:8080/api/v1/question", BoardData, {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              })
+              .then((res) => {
+                setState(!state);
+                console.log(res);
+              })
+              .catch((err) => console.log(err));
           }}
         >
           <Adjustment>
