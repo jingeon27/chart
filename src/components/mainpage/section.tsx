@@ -169,7 +169,6 @@ export default function Section() {
     <>
       {IsLogin ? (
         <>
-          {" "}
           <Link to="/schedule">
             <Sc>
               <Day1>2022년 1학기</Day1>

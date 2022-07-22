@@ -10,6 +10,7 @@ import {
   isLogin,
 } from "../../State/atom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
+import { BASE_URL } from "../../data";
 export default function Mainpage() {
   const setIsLogin = useSetRecoilState(isLogin);
   const SchoolCode = useRecoilValue(schoolCode);
@@ -30,7 +31,7 @@ export default function Mainpage() {
         classNum: ClassNum,
       };
       await axios
-        .post("http://118.67.130.149:8080/api/v1/auth/signup/code", logindata)
+        .post(BASE_URL + "/api/v1/auth/signup/code", logindata)
         .then((res) => {
           name();
           async function name() {
@@ -38,10 +39,7 @@ export default function Mainpage() {
               accessToken: code,
             };
             await axios
-              .post(
-                "http://118.67.130.149:8080/api/v1/auth/login/code",
-                signindata
-              )
+              .post(BASE_URL + "/api/v1/auth/login/code", signindata)
               .then((res: any) => {
                 const { accessToken, refreshToken } = res.data;
                 window.sessionStorage.setItem("refreshToken", refreshToken);
@@ -67,7 +65,7 @@ export default function Mainpage() {
         accessToken: code,
       };
       await axios
-        .post("http://118.67.130.149:8080/api/v1/auth/login/code", signindata)
+        .post(BASE_URL + "/api/v1/auth/login/code", signindata)
         .then((res: any) => {
           const { accessToken, refreshToken } = res.data;
           window.sessionStorage.setItem("refreshToken", refreshToken);

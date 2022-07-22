@@ -182,7 +182,7 @@ export default function Meal() {
         });
       // await axios({
       //   method: "GET",
-      //   baseURL: "http://118.67.130.149:8080/api/v1/meal",
+      //   baseURL: BASE_URL+"/api/v1/meal",
       //   params: params,
       //   headers: {
       //     Authorization: `Bearer ${token}`,

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { BASE_URL } from "../../data";
 type arrprop = {
   id: string;
 };
@@ -126,7 +127,7 @@ export default function Schedule() {
     async function asdf() {
       await axios({
         method: "GET",
-        url: "http://118.67.130.149:8080/api/v1/timetable/week",
+        url: BASE_URL + "/api/v1/timetable/week",
         headers: {
           Authorization: `Bearer ${token}`,
         },

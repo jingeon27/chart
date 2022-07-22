@@ -11,6 +11,7 @@ import {
 import { useSetRecoilState, useRecoilValue, useRecoilState } from "recoil";
 import ShowBoard from "./showboard";
 import styled from "styled-components";
+import { BASE_URL } from "../../data";
 // interface Airline {
 //   id: number;
 //   name: string;
@@ -143,7 +144,7 @@ function App() {
       // } =
       await axios({
         method: "GET",
-        baseURL: "http://118.67.130.149:8080/api/v1/question/list",
+        baseURL: BASE_URL + "/api/v1/question/list",
         params: params,
         headers: {
           Authorization: `Bearer ${token}`,

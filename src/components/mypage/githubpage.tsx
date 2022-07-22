@@ -2,6 +2,7 @@ import styled from "styled-components";
 import GitHubCalendar from "react-github-calendar";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { BASE_URL } from "../../data";
 const Container = styled.div`
   position: absolute;
   left: 0px;
@@ -46,7 +47,7 @@ export default function Githubpage() {
     async function name() {
       await axios({
         method: "GET",
-        baseURL: "http://118.67.130.149:8080/api/v1/auth/my",
+        baseURL: BASE_URL + "/api/v1/auth/my",
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { BASE_URL } from "../../data";
 type Arrprops = {
   id: string;
 };
@@ -83,7 +84,7 @@ export default function Mypage() {
     async function name() {
       await axios({
         method: "GET",
-        baseURL: "http://118.67.130.149:8080/api/v1/auth/my",
+        baseURL: BASE_URL + "/api/v1/auth/my",
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -10,6 +10,7 @@ import {
   classsNum,
   gradeEl,
 } from "../../State/atom";
+import { BASE_URL } from "../../data";
 const Login = styled.div`
   position: fixed;
   left: 0;
@@ -127,7 +128,7 @@ export default function Signup() {
     Bring();
     async function Bring() {
       await axios
-        .post("http://118.67.130.149:8080/api/v1/school", null, { params })
+        .post(BASE_URL + "/api/v1/school", null, { params })
         .then((res) => {
           console.log(res.data[0]);
           const data = res.data[0];

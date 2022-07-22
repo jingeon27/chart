@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
+import { BASE_URL } from "../../data";
 import { writeOn } from "../../State/atom";
 const Container = styled.div`
   position: absolute;
@@ -139,15 +140,11 @@ export default function Boardwrite() {
             {
               title !== "" && text !== ""
                 ? axios
-                    .post(
-                      "http://118.67.130.149:8080/api/v1/question",
-                      BoardData,
-                      {
-                        headers: {
-                          Authorization: `Bearer ${token}`,
-                        },
-                      }
-                    )
+                    .post(BASE_URL + "/api/v1/question", BoardData, {
+                      headers: {
+                        Authorization: `Bearer ${token}`,
+                      },
+                    })
                     .then((res) => {
                       setState(!state);
                       console.log(res);
