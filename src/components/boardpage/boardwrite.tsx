@@ -135,17 +135,26 @@ export default function Boardwrite() {
               title: title,
               content: text,
             };
-            axios
-              .post("http://118.67.130.149:8080/api/v1/question", BoardData, {
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                },
-              })
-              .then((res) => {
-                setState(!state);
-                console.log(res);
-              })
-              .catch((err) => console.log(err));
+            // eslint-disable-next-line no-lone-blocks
+            {
+              title !== "" && text !== ""
+                ? axios
+                    .post(
+                      "http://118.67.130.149:8080/api/v1/question",
+                      BoardData,
+                      {
+                        headers: {
+                          Authorization: `Bearer ${token}`,
+                        },
+                      }
+                    )
+                    .then((res) => {
+                      setState(!state);
+                      console.log(res);
+                    })
+                    .catch((err) => console.log(err))
+                : setState(!state);
+            }
           }}
         >
           <Adjustment>

@@ -32,7 +32,6 @@ export default function Mainpage() {
       await axios
         .post("http://118.67.130.149:8080/api/v1/auth/signup/code", logindata)
         .then((res) => {
-          console.log(res);
           name();
           async function name() {
             const signindata = {
@@ -44,15 +43,9 @@ export default function Mainpage() {
                 signindata
               )
               .then((res: any) => {
-                console.log(res);
-                const token = res.data.refreshToken;
-                console.log(token);
-                window.sessionStorage.setItem("refreshToken", token);
-                const Token = sessionStorage.getItem("refreshToken");
-                console.log(Token, "세션스토리지 잘 작동되는지 확인");
-                const access_Token = res.data.accessToken;
-                window.sessionStorage.setItem("accessToken", access_Token);
-                console.log(sessionStorage.getItem("accessToken"));
+                const { accessToken, refreshToken } = res.data;
+                window.sessionStorage.setItem("refreshToken", refreshToken);
+                window.sessionStorage.setItem("accessToken", accessToken);
                 setIsLogin(true);
               })
               .catch((err) => {
@@ -62,7 +55,6 @@ export default function Mainpage() {
         })
         .catch((err) => {
           console.log(err);
-          console.log("잘못한거임ㅋ");
         });
     }
   }, []);
@@ -77,15 +69,9 @@ export default function Mainpage() {
       await axios
         .post("http://118.67.130.149:8080/api/v1/auth/login/code", signindata)
         .then((res: any) => {
-          console.log(res);
-          const token = res.data.refreshToken;
-          console.log(token);
-          window.sessionStorage.setItem("refreshToken", token);
-          const Token = sessionStorage.getItem("refreshToken");
-          console.log(Token, "세션스토리지 잘 작동되는지 확인");
-          const access_Token = res.data.accessToken;
-          window.sessionStorage.setItem("accessToken", access_Token);
-          console.log(sessionStorage.getItem("accessToken"));
+          const { accessToken, refreshToken } = res.data;
+          window.sessionStorage.setItem("refreshToken", refreshToken);
+          window.sessionStorage.setItem("accessToken", accessToken);
           setIsLogin(true);
         })
         .catch((err) => {

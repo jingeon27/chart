@@ -127,7 +127,7 @@ export default function Header() {
   // const [isSearchMode, setIsSearchMode] = useState<boolean>(false);
   const [state, setState] = useRecoilState<boolean>(loginState);
   const [signState, setSignState] = useRecoilState<boolean>(loginPageState);
-  const IsLogin = useRecoilValue(isLogin);
+  const [login, setLogin] = useRecoilState(isLogin);
   const showSignup = () => {
     setState(!state);
   };
@@ -156,7 +156,7 @@ export default function Header() {
           <Logo src={Image}></Logo>
         </StyledLink>
         <Mainmenu>
-          {IsLogin ? (
+          {login ? (
             <>
               {arr.map((user) => (
                 <li className="item">
@@ -179,15 +179,28 @@ export default function Header() {
               ))}
             </>
           )}
-          <li>
-            <Logup onClick={showSignup}>Signup</Logup>
-          </li>
-          <li>
-            <Slash></Slash>
-          </li>
-          <li>
-            <LogIn onClick={showSignin}>Signin</LogIn>
-          </li>
+          {!login ? (
+            <>
+              <li>
+                <Logup onClick={showSignup}>Signup</Logup>
+              </li>
+              <li>
+                <Slash />
+              </li>
+              <li>
+                <LogIn onClick={showSignin}>Signin</LogIn>
+              </li>
+            </>
+          ) : (
+            <LogIn
+              onClick={() => {
+                setLogin(false);
+                sessionStorage.clear();
+              }}
+            >
+              Log out
+            </LogIn>
+          )}
         </Mainmenu>
       </Head>
     </>

@@ -38,7 +38,7 @@ const Username = styled.h1`
   font-family: "Amiko", sans-serif;
 `;
 export default function Githubpage() {
-  const [userId, setUserId] = useState<any>("");
+  const [userId, setUserId] = useState<string>("");
   // const [commit, setCommit] = useState("");
   useEffect(() => {
     const token = sessionStorage.getItem("accessToken");
@@ -52,8 +52,6 @@ export default function Githubpage() {
         },
       })
         .then((res) => {
-          console.log(userId);
-          console.log(res);
           setUserId(res.data.name);
         })
         .catch((err) => {

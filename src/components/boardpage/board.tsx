@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Boardpage from "./boardpage";
-import Pagination from "./Pagination";
 import Boardwrite from "./boardwrite";
 import {
   writeOn,
@@ -162,18 +161,7 @@ function App() {
     };
 
     fetch();
-  }, [idx]);
-  const arr = [
-    { day: "2022", title: "2022", text: "4044", name: "김진건" },
-    { day: "2022", title: "2022", text: "4044", name: "김진건" },
-    { day: "2022", title: "2022", text: "4044", name: "김진건" },
-    { day: "2022", title: "2022", text: "4044", name: "김진건" },
-    { day: "2022", title: "2022", text: "4044", name: "김진건" },
-    { day: "2022", title: "2022", text: "4044", name: "김진건" },
-    { day: "2022", title: "2022", text: "4044", name: "김진건" },
-    { day: "2022", title: "2022", text: "4044", name: "김진건" },
-    { day: "2022", title: "2022", text: "4044", name: "김진건" },
-  ];
+  }, [idx, state]);
   function showBoardTextEL(title: string, content: string) {
     setShowTitle(title);
     setShowContent(content);
@@ -186,12 +174,12 @@ function App() {
           <li key={item._id}>{item.name}</li>
         ))}
       </ul> */}
-
+      {/* 
       <Pagination
         count={totalPages}
         page={idx}
         onPageChange={handlePageChange}
-      />
+      /> */}
       {showBoard ? (
         <>
           <Location>

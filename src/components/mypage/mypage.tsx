@@ -73,9 +73,10 @@ const arr: Arrprops[] = [
   { id: "개발자 소개" },
   { id: "라이선스" },
 ];
+
 export default function Mypage() {
-  const [userId, setUserId] = useState("");
-  const [userName, setUserName] = useState("");
+  const [userId, setUserId] = useState<string>("");
+  const [userName, setUserName] = useState<string>("");
   useEffect(() => {
     const token = sessionStorage.getItem("accessToken");
     name();
@@ -88,7 +89,6 @@ export default function Mypage() {
         },
       })
         .then((res) => {
-          console.log(res);
           setUserId(res.data.githubId);
           setUserName(res.data.name);
         })

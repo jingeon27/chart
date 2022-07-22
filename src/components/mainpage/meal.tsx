@@ -156,8 +156,8 @@ export default function Meal() {
     const date = new Date(day);
     const mealDate = dayjs(date).format("YYYYMMDD");
     // const token = localStorage.getItem("accessToken");
-    asdf();
-    async function asdf() {
+    getMeal();
+    async function getMeal() {
       const params = {
         // Type: "json",
         // pIndex: 1,
@@ -176,8 +176,6 @@ export default function Meal() {
         .then((res) => {
           const data = res.data;
           setShowMenu(data.mealServiceDietInfo[1].row);
-          console.log(showMenu);
-          console.log(res);
         })
         .catch((err) => {
           console.log(err);
