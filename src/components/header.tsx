@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Signin from "./loginpage/signin";
 import Signup from "./loginpage/signup";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { loginState, loginPageState, isLogin } from "../State/atom";
 type arrprops = {
   value: string;

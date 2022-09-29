@@ -135,6 +135,10 @@ function App() {
     setIdx(currentPage);
   };
 
+  // const divs: number[] = Array.from({ length: 10 }, (t, i) => {
+  //   return { name: "김진건" };
+  // });
+
   useEffect(() => {
     const fetch = async () => {
       const token = sessionStorage.getItem("accessToken");

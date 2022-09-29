@@ -56,6 +56,7 @@ const ContentsInput = styled.textarea`
   border: 2px solid #93caee;
   border-radius: 10px;
   white-space: pre-wrap;
+  resize: none;
 `;
 const Button = styled.div`
   position: absolute;

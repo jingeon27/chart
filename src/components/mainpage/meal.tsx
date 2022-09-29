@@ -150,7 +150,6 @@ export default function Meal() {
     { list: "급식없음" },
     { list: "급식없음" },
   ];
-  useEffect(() => {});
   useEffect(() => {
     console.log("asd");
     const date = new Date(day);

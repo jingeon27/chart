@@ -174,7 +174,7 @@ export default function Schedule() {
           ))}
         </St>
         <Sr>
-          {showSubject === [] ? (
+          {showSubject.length === 0 ? (
             <div>Loading...</div>
           ) : (
             <>
